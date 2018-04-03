@@ -32,10 +32,19 @@ test:
 
 about:
   home: https://github.com/almarklein/visvis
+  license: BSD 3-Clause
+  license_family: BSD
+  summary: An object oriented approach to visualization of 1D to 4D data
+  description: |
+    Visvis is a pure Python library for visualization of 1D to 4D data in an
+    object oriented way. Essentially, visvis is an object oriented layer of
+    Python on top of OpenGl, thereby combining the power of OpenGl with the
+    usability of Python. A Matlab-like interface in the form of a set of
+    functions allows easy creation of objects.
+    The successor of Visvis, Vispy, is taking shape and will eventually
+    replace Visvis.
   doc_url: https://github.com/almarklein/visvis/wiki
   dev_url: https://github.com/almarklein/visvis
-  summary: Visvis - the object oriented approach to visualization
-  license: BSD 3-Clause
 
 extra:
   recipe-maintainers:
