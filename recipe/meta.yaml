@@ -1,6 +1,6 @@
 {% set name = "visvis" %}
-{% set version = "1.12.2" %}
-{% set sha256 = "ccfc5fc81223080f1d344617816d8a1acae462a80fb753e54ae2cdcb0af14705" %}
+{% set version = "1.12.4" %}
+{% set sha256 = "0806d45e1829ad8e53db21487ada041c16eea8c7363390a7339316fba3ce2d93" %}
 
 package:
   name: {{ name }}
