@@ -1,34 +1,60 @@
 {% set name = "visvis" %}
-{% set version = "1.13.0" %}
-{% set sha256 = "319d2e37c9756a029be33dc491461b8359fc52caa9c5147807eba583cafbf749" %}
+{% set version = "1.15.0" %}
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  sha256: aa013c62ea54ae4d170096e1fced7c3697b1d05c2fe6b38e822af0a986422a39
 
 build:
-  noarch: python
-  script: python -m pip install --no-deps --ignore-installed .
   number: 0
+  skip: true  # [py<27]
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
 
 requirements:
   host:
     - python
     - pip
+    - flit >=3.2,<4
   run:
     - python
     - numpy
     - pyopengl
 
+# =======================
+# Test configuration
+# =======================
+{% set test_root = "tests" %}
+
+# - test_im_read_write: no file: vv.imread("astronaut.png")
+{% set skip_keywords = [
+    "test_im_read_write"
+] %}
+
 test:
+  requires:
+    - pip
+    - pytest
+  source_files:
+    - {{ test_root }}
   imports:
     - visvis
+    - visvis.core
+    - visvis.backends
+    - visvis.functions
     - visvis.processing
+    - visvis.text
+    - visvis.utils
+    - visvis.vvmovie
+    - visvis.wibjects
+    - visvis.wobjects
+  commands:
+    - pip check
+    - python -c "import visvis; print(visvis.__version__)"
+    - pytest -v {{ test_root }} -k "not ({{ skip_keywords | join(' or ') }})"
 
 about:
   home: https://github.com/almarklein/visvis
